@@ -11,7 +11,7 @@ import SwiftUI
 struct PhotoTagsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PhotosListView()
         }
     }
 }
