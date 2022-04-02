@@ -18,10 +18,16 @@ struct PhotosListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(vm.photos) {
-                    PhotoRowView(photo: $0)
+                ForEach(vm.photos) { photo in
+                    NavigationLink {
+                        PhotoDetailView(photo: photo)
+                    } label: {
+                        PhotoRowView(photo: photo)
+                    }
                 }
+                .onDelete(perform: vm.delete)
             }
+            .listStyle(.plain)
             .navigationTitle("PhotoTags")
             .toolbar {
                 Button {
@@ -36,14 +42,19 @@ struct PhotosListView: View {
             }
             .onChange(of: imageSelected) { _ in
                 if let _ = imageSelected {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         showAddPhotoView = true
                     }
                 }
             }
             .sheet(isPresented: $showAddPhotoView) {
-                AddPhotoView(image: imageSelected!)
-                    .interactiveDismissDisabled(true)
+                AddPhotoView(image: imageSelected!) { name in
+                    
+                    if let imageSelected = imageSelected {
+                        vm.addNewPhoto(image: imageSelected, name: name)
+                    }
+                }
+                .interactiveDismissDisabled(true)
             }
         }
     }

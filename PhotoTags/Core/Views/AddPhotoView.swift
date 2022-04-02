@@ -11,37 +11,46 @@ struct AddPhotoView: View {
     @Environment(\.dismiss) private var dismiss
     
     let image: UIImage
+    let onSave: (String) -> Void
     
     @State private var name = ""
     @FocusState private var fieldIsFocused: Bool
     
+    @State private var showNameAlert = false
+    
+    init(image: UIImage, onSave: @escaping (String) -> Void) {
+        self.image = image
+        self.onSave = onSave
+    }
+    
     var body: some View {
-        VStack(spacing: 15) {
+        VStack(spacing: 25) {
             HStack {
                 Button("Cancel") {
                     dismiss()
                 }
                 
-                Spacer()
+                Text("New Photo")
+                    .font(.title.weight(.semibold))
+                    .frame(maxWidth: .infinity)
                 
-                Button("Done") {
-                    dismiss()
+                Button("Save") {
+                    let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if !trimmedName.isEmpty {
+                        onSave(name)
+                        dismiss()
+                    } else {
+                        showNameAlert = true
+                    }
                 }
                 .font(.headline)
             }
             
-            Text("New Photo")
-                .font(.largeTitle.weight(.semibold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 5)
-            
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
-                .cornerRadius(15)
-                .padding(.bottom, 10)
             
-            TextField("Add name...", text: $name)
+            TextField("Name...", text: $name)
                 .focused($fieldIsFocused)
                 .font(.headline)
                 .frame(height: 52)
@@ -51,17 +60,28 @@ struct AddPhotoView: View {
             
             Spacer()
         }
-        .padding()
+        .padding([.top, .horizontal])
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 fieldIsFocused = true
             }
+        }
+        .alert("Name is empty!", isPresented: $showNameAlert) {
+            Button("OK", role: .cancel) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    fieldIsFocused = true
+                }
+            }
+        } message: {
+            Text("You must provide a name for the picture in order to save it")
         }
     }
 }
 
 struct AddPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPhotoView(image: UIImage(systemName: "photo")!)
+        AddPhotoView(image: UIImage(systemName: "photo")!) { _ in
+            
+        }
     }
 }

@@ -11,11 +11,13 @@ struct PhotoRowView: View {
     let photo: Photo
     
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Image(uiImage: photo.image)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 60, height: 60)
+                .frame(height: 60)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(maxWidth: UIScreen.main.bounds.width / 4)
             
             Text(photo.name)
                 .font(.headline)
@@ -28,5 +30,6 @@ struct PhotoRowView: View {
 struct PhotoRowView_Previews: PreviewProvider {
     static var previews: some View {
         PhotoRowView(photo: Photo.example)
+            .previewLayout(.sizeThatFits)
     }
 }

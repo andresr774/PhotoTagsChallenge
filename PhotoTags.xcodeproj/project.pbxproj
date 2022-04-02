@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8133603327F8AD040043F304 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603227F8AD040043F304 /* PhotoDetailView.swift */; };
+		8133603627F8B28D0043F304 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603527F8B28D0043F304 /* FileManager.swift */; };
 		815B398C27F7889D004E1102 /* PhotoTagsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B398B27F7889D004E1102 /* PhotoTagsApp.swift */; };
 		815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B398D27F7889D004E1102 /* PhotosListView.swift */; };
 		815B399027F7889D004E1102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B398F27F7889D004E1102 /* Assets.xcassets */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8133603227F8AD040043F304 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		8133603527F8B28D0043F304 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		815B398827F7889D004E1102 /* PhotoTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		815B398B27F7889D004E1102 /* PhotoTagsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTagsApp.swift; sourceTree = "<group>"; };
 		815B398D27F7889D004E1102 /* PhotosListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosListView.swift; sourceTree = "<group>"; };
@@ -42,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8133603427F8B27C0043F304 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8133603527F8B28D0043F304 /* FileManager.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		815B397F27F7889D004E1102 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				815B398B27F7889D004E1102 /* PhotoTagsApp.swift */,
+				8133603427F8B27C0043F304 /* Extensions */,
 				815B39A427F79932004E1102 /* Utilities */,
 				815B39A327F78E09004E1102 /* Models */,
 				815B399F27F78D35004E1102 /* Core */,
@@ -109,6 +122,7 @@
 			children = (
 				815B398D27F7889D004E1102 /* PhotosListView.swift */,
 				815B399D27F78ACC004E1102 /* PhotoRowView.swift */,
+				8133603227F8AD040043F304 /* PhotoDetailView.swift */,
 				816E190F27F79F7A00C5878E /* AddPhotoView.swift */,
 			);
 			path = Views;
@@ -200,11 +214,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8133603327F8AD040043F304 /* PhotoDetailView.swift in Sources */,
 				815B399C27F78977004E1102 /* Photo.swift in Sources */,
 				815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */,
 				816E191027F79F7A00C5878E /* AddPhotoView.swift in Sources */,
 				815B399E27F78ACC004E1102 /* PhotoRowView.swift in Sources */,
 				815B39A627F79941004E1102 /* ImagePicker.swift in Sources */,
+				8133603627F8B28D0043F304 /* FileManager.swift in Sources */,
 				815B399A27F78935004E1102 /* PhotosListView-ViewModel.swift in Sources */,
 				815B398C27F7889D004E1102 /* PhotoTagsApp.swift in Sources */,
 			);
@@ -344,7 +360,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,7 +391,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
