@@ -6,17 +6,22 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PhotoDetailView: View {
     let photo: Photo
     
     var body: some View {
-        Image(uiImage: photo.image)
-            .resizable()
-            .scaledToFit()
-            .frame(maxHeight: .infinity, alignment: .top)
-            .padding()
-            .navigationTitle(photo.name)
+        VStack {
+            Image(uiImage: UIImage(data: photo.image) ?? UIImage())
+                .resizable()
+                .scaledToFit()
+            
+            //Map(coordinateRegion: <#T##Binding<MKCoordinateRegion>#>)
+        }
+        .padding()
+        .frame(maxHeight: .infinity, alignment: .top)
+        .navigationTitle(photo.name)
     }
 }
 

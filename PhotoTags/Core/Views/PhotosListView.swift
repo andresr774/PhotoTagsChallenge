@@ -48,10 +48,9 @@ struct PhotosListView: View {
                 }
             }
             .sheet(isPresented: $showAddPhotoView) {
-                AddPhotoView(image: imageSelected!) { name in
-                    
+                AddPhotoView(image: imageSelected!) { name, location in
                     if let imageSelected = imageSelected {
-                        vm.addNewPhoto(image: imageSelected, name: name)
+                        vm.addNewPhoto(image: imageSelected, name: name, location: location)
                     }
                 }
                 .interactiveDismissDisabled(true)

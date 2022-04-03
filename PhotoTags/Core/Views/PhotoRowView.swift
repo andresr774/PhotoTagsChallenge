@@ -12,7 +12,7 @@ struct PhotoRowView: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            Image(uiImage: photo.image)
+            Image(uiImage: UIImage(data: photo.image) ?? UIImage())
                 .resizable()
                 .scaledToFit()
                 .frame(height: 60)
