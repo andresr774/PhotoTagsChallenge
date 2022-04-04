@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		8133603327F8AD040043F304 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603227F8AD040043F304 /* PhotoDetailView.swift */; };
 		8133603627F8B28D0043F304 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603527F8B28D0043F304 /* FileManager.swift */; };
-		8133603827FA00D50043F304 /* PhotoDetailView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603727FA00D50043F304 /* PhotoDetailView-ViewModel.swift */; };
 		8133603A27FA01F90043F304 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603927FA01F90043F304 /* LocationFetcher.swift */; };
+		8133604027FB7BFE0043F304 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603F27FB7BFE0043F304 /* Animatable.swift */; };
+		8133604227FB7CB80043F304 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133604127FB7CB80043F304 /* View.swift */; };
 		815B398C27F7889D004E1102 /* PhotoTagsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B398B27F7889D004E1102 /* PhotoTagsApp.swift */; };
 		815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B398D27F7889D004E1102 /* PhotosListView.swift */; };
 		815B399027F7889D004E1102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B398F27F7889D004E1102 /* Assets.xcassets */; };
@@ -25,9 +26,10 @@
 /* Begin PBXFileReference section */
 		8133603227F8AD040043F304 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		8133603527F8B28D0043F304 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		8133603727FA00D50043F304 /* PhotoDetailView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoDetailView-ViewModel.swift"; sourceTree = "<group>"; };
 		8133603927FA01F90043F304 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 		8133603B27FA03220043F304 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8133603F27FB7BFE0043F304 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
+		8133604127FB7CB80043F304 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		815B398827F7889D004E1102 /* PhotoTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		815B398B27F7889D004E1102 /* PhotoTagsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTagsApp.swift; sourceTree = "<group>"; };
 		815B398D27F7889D004E1102 /* PhotosListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosListView.swift; sourceTree = "<group>"; };
@@ -55,8 +57,17 @@
 			isa = PBXGroup;
 			children = (
 				8133603527F8B28D0043F304 /* FileManager.swift */,
+				8133604127FB7CB80043F304 /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8133603E27FB7BED0043F304 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8133603F27FB7BFE0043F304 /* Animatable.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		815B397F27F7889D004E1102 = {
@@ -80,6 +91,7 @@
 			children = (
 				8133603B27FA03220043F304 /* Info.plist */,
 				815B398B27F7889D004E1102 /* PhotoTagsApp.swift */,
+				8133603E27FB7BED0043F304 /* Helpers */,
 				8133603427F8B27C0043F304 /* Extensions */,
 				815B39A427F79932004E1102 /* Utilities */,
 				815B39A327F78E09004E1102 /* Models */,
@@ -119,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				815B399927F78935004E1102 /* PhotosListView-ViewModel.swift */,
-				8133603727FA00D50043F304 /* PhotoDetailView-ViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -225,11 +236,12 @@
 				8133603327F8AD040043F304 /* PhotoDetailView.swift in Sources */,
 				815B399C27F78977004E1102 /* Photo.swift in Sources */,
 				815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */,
-				8133603827FA00D50043F304 /* PhotoDetailView-ViewModel.swift in Sources */,
 				8133603A27FA01F90043F304 /* LocationFetcher.swift in Sources */,
 				816E191027F79F7A00C5878E /* AddPhotoView.swift in Sources */,
 				815B399E27F78ACC004E1102 /* PhotoRowView.swift in Sources */,
+				8133604027FB7BFE0043F304 /* Animatable.swift in Sources */,
 				815B39A627F79941004E1102 /* ImagePicker.swift in Sources */,
+				8133604227FB7CB80043F304 /* View.swift in Sources */,
 				8133603627F8B28D0043F304 /* FileManager.swift in Sources */,
 				815B399A27F78935004E1102 /* PhotosListView-ViewModel.swift in Sources */,
 				815B398C27F7889D004E1102 /* PhotoTagsApp.swift in Sources */,
