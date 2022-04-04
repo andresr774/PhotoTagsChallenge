@@ -15,7 +15,7 @@ struct PhotoRowView: View {
             Image(uiImage: UIImage(data: photo.image) ?? UIImage())
                 .resizable()
                 .scaledToFit()
-                .frame(height: 60)
+                .frame(height: 55)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .frame(maxWidth: UIScreen.main.bounds.width / 4)
             

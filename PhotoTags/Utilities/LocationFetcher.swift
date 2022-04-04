@@ -46,8 +46,6 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
             locationAuthorized = true
-//            Task { @MainActor in
-//            }
         }
     }
 }

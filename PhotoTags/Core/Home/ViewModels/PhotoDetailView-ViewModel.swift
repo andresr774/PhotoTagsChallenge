@@ -9,9 +9,12 @@ import Foundation
 import MapKit
 
 extension PhotoDetailView {
+    
     @MainActor class ViewModel: ObservableObject {
-        //@Published var mapRegion = MKCoordinateRegion(center: <#T##CLLocationCoordinate2D#>, span: <#T##MKCoordinateSpan#>)
+        @Published var mapRegion: MKCoordinateRegion
         
-        
+        init(mapRegion: MKCoordinateRegion) {
+            self.mapRegion = mapRegion
+        }
     }
 }

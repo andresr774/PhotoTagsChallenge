@@ -64,15 +64,30 @@ struct AddPhotoView: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 locationFetcher.start()
+                if locationFetcher.locationAuthorized {
+                    // Location authorized by user previously
+                    fieldIsFocused = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if let location = locationFetcher.lastKnownLocation {
+                            currentLocation = location
+                            print("[😀] current location on appear: \(location)")
+                        }
+                    }
+                }
             }
         }
+        // Location authorized by user
         .onChange(of: locationFetcher.locationAuthorized) { authorized in
             if authorized {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     fieldIsFocused = true
-                    currentLocation = locationFetcher.lastKnownLocation
-                    print("[😀] current location: \(currentLocation)")
+                    if let location = locationFetcher.lastKnownLocation {
+                        currentLocation = location
+                        print("[😀] current location on appear: \(location)")
+                    }
                 }
+            } else {
+                showLocationAlert()
             }
         }
         .alert(alertTitle, isPresented: $showAlert) {
@@ -93,15 +108,19 @@ struct AddPhotoView: View {
                 onSave(trimmedName, currentLocation)
                 dismiss()
             } else {
-                alertTitle = "We couldn't get your location"
-                alertMessage = "Please check your settings location"
-                showAlert = true
+                showLocationAlert()
             }
         } else {
             alertTitle = "Name is empty!"
             alertMessage = "You must provide a name for the picture in order to save it"
             showAlert = true
         }
+    }
+    
+    private func showLocationAlert() {
+        alertTitle = "We couldn't get your location"
+        alertMessage = "Please check your settings location"
+        showAlert = true
     }
 }
 

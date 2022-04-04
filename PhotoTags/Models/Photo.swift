@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct Photo: Identifiable, Codable, Comparable {
     var id = UUID()
@@ -13,6 +14,10 @@ struct Photo: Identifiable, Codable, Comparable {
     let name: String
     let latitude: Double
     let longitude: Double
+    
+    var location: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
     
     static func <(lhs: Photo, rhs: Photo) -> Bool {
         lhs.name < rhs.name
