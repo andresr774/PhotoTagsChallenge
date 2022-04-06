@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81198DC827FDF7A600E316E8 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81198DC727FDF7A600E316E8 /* TestView.swift */; };
 		8133603327F8AD040043F304 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603227F8AD040043F304 /* PhotoDetailView.swift */; };
 		8133603627F8B28D0043F304 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603527F8B28D0043F304 /* FileManager.swift */; };
 		8133603A27FA01F90043F304 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603927FA01F90043F304 /* LocationFetcher.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81198DC727FDF7A600E316E8 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		8133603227F8AD040043F304 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		8133603527F8B28D0043F304 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		8133603927FA01F90043F304 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				815B39A427F79932004E1102 /* Utilities */,
 				815B39A327F78E09004E1102 /* Models */,
 				815B399F27F78D35004E1102 /* Core */,
+				81198DC727FDF7A600E316E8 /* TestView.swift */,
 				815B398F27F7889D004E1102 /* Assets.xcassets */,
 				815B399127F7889D004E1102 /* Preview Content */,
 			);
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81198DC827FDF7A600E316E8 /* TestView.swift in Sources */,
 				8133603327F8AD040043F304 /* PhotoDetailView.swift in Sources */,
 				815B399C27F78977004E1102 /* Photo.swift in Sources */,
 				815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */,

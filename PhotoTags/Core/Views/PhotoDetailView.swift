@@ -12,22 +12,48 @@ struct PhotoDetailView: View {
     let photo: Photo
     
     @State private var mapRegion: MKCoordinateRegion
-    @State private var mapHeight: CGFloat = 100
-    
     @State private var imageHeight: CGFloat = 200
-    
-    @State private var viewJustOpen = true
     @State private var expandMap = false
     
-    @Namespace var namespace
+    @State private var scaleAmount = 1.0
+    @State private var offset = CGSize.zero
+    
+    var magnification: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                scaleAmount = value
+            }
+            .onEnded { _ in
+                withAnimation {
+                    scaleAmount = 1.0
+                }
+            }
+            //.simultaneously(with: drag)
+    }
+    
+    var drag: some Gesture {
+        DragGesture()
+            .onChanged { gesture in
+                print("Drag value: \(gesture)")
+                if scaleAmount > 1.0 {
+                    offset = gesture.translation
+                }
+            }
+            .onEnded { _ in
+                withAnimation {
+                    offset = CGSize.zero
+                }
+            }
+    }
     
     let expandLogo = "arrow.up.backward.and.arrow.down.forward.circle.fill"
     let shrinkLogo = "arrow.down.right.and.arrow.up.left.circle.fill"
     
     var body: some View {
-        VStack(spacing: 25) {
+        VStack(spacing: 30) {
             if !expandMap {
                 image
+                    .zIndex(1)
             }
             map
         }
@@ -64,6 +90,9 @@ extension PhotoDetailView {
             .resizable()
             .scaledToFit()
             .fixedSize(horizontal: false, vertical: true)
+            .scaleEffect(scaleAmount)
+            .offset(offset)
+            .gesture(magnification)
     }
     private var map: some View {
         ZStack(alignment: .top) {
