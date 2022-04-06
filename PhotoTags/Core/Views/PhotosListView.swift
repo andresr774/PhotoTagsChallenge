@@ -24,6 +24,7 @@ struct PhotosListView: View {
                     } label: {
                         PhotoRowView(photo: photo)
                     }
+                    .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
                 }
                 .onDelete(perform: vm.delete)
             }
@@ -38,11 +39,12 @@ struct PhotosListView: View {
                 }
             }
             .sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $imageSelected)
+                //ImagePicker(image: $imageSelected)
+                PictureManager(image: $imageSelected)
             }
             .onChange(of: imageSelected) { _ in
                 if let _ = imageSelected {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         showAddPhotoView = true
                     }
                 }

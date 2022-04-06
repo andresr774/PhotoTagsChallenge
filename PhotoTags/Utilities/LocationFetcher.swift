@@ -9,7 +9,7 @@ import CoreLocation
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     let manager = CLLocationManager()
-    var lastKnownLocation: CLLocationCoordinate2D?
+    var lastKnownLocation: CLLocation?
     
     @Published var locationAuthorized: Bool
         
@@ -21,6 +21,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
             locationAuthorized = false
         }
         super.init()
+        
         self.manager.delegate = self
         
         if !locationAuthorized {
@@ -38,14 +39,19 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        lastKnownLocation = locations.first?.coordinate
+        lastKnownLocation = locations.first
         print("user location: \(lastKnownLocation)")
+    }
+    
+    func stopUpdatingLocation() {
+        manager.stopUpdatingLocation()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            locationAuthorized = true
+            Task{ @MainActor in
+                locationAuthorized = true
+            }
         }
     }
 }

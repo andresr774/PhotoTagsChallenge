@@ -12,43 +12,39 @@ struct PhotoDetailView: View {
     let photo: Photo
     
     @State private var mapRegion: MKCoordinateRegion
-    @State private var mapHeight: CGFloat = 200
+    @State private var mapHeight: CGFloat = 100
+    
+    @State private var imageHeight: CGFloat = 200
     
     @State private var viewJustOpen = true
     @State private var expandMap = false
     
-    let expandImage = "arrow.up.backward.and.arrow.down.forward.circle.fill"
-    let shrinkImage = "arrow.down.right.and.arrow.up.left.circle.fill"
+    @Namespace var namespace
+    
+    let expandLogo = "arrow.up.backward.and.arrow.down.forward.circle.fill"
+    let shrinkLogo = "arrow.down.right.and.arrow.up.left.circle.fill"
     
     var body: some View {
-        VStack(spacing: 20) {
-            image
-            
-            // Read map height
-            if viewJustOpen {
-                GeometryReader { geo in
-                    Rectangle().fill(.clear)
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                mapHeight = geo.size.height
-                                viewJustOpen = false
-                            }
-                        }
-                }
+        VStack(spacing: 25) {
+            if !expandMap {
+                image
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .overlay(alignment: .bottom) {
             map
         }
+        .padding(expandMap ? 0 : 15)
         .navigationTitle(photo.name)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if expandMap {
+                toolbarImage
+            }
+        }
     }
     
     init(photo: Photo) {
         self.photo = photo
         let center = CLLocationCoordinate2D(latitude: photo.latitude, longitude: photo.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: center, span: span)
         self._mapRegion = State(wrappedValue: region)
     }
@@ -68,7 +64,6 @@ extension PhotoDetailView {
             .resizable()
             .scaledToFit()
             .fixedSize(horizontal: false, vertical: true)
-            .padding()
     }
     private var map: some View {
         ZStack(alignment: .top) {
@@ -78,11 +73,8 @@ extension PhotoDetailView {
             .cornerRadius(expandMap ? 0 : 15)
             expandButton
         }
-        .frame(
-            maxWidth: .infinity,
-            maxHeight: expandMap ? .infinity : mapHeight)
-        .padding(expandMap ? 0 : 15)
-        .ignoresSafeArea(.all, edges: .bottom)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.all, edges: expandMap ? .bottom : .horizontal)
     }
     
     private var expandButton: some View {
@@ -90,18 +82,26 @@ extension PhotoDetailView {
             RoundedRectangle(cornerRadius: 12)
                 .fill(.thickMaterial)
             
-            Image(systemName: expandMap ? shrinkImage : expandImage)
+            Image(systemName: expandMap ? shrinkLogo : expandLogo)
                 .font(.title2)
                 .rotationEffect(Angle(degrees: 90))
                 .foregroundColor(.primary.opacity(0.7))
         }
         .frame(width: 44, height: 44)
         .onTapGesture {
-            withAnimation {
+            withAnimation(.easeInOut) {
                 expandMap.toggle()
             }
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
         .padding(10)
+    }
+    
+    private var toolbarImage: some View {
+        Image(uiImage: UIImage(data: photo.image) ?? UIImage())
+            .resizable()
+            .scaledToFit()
+            .cornerRadius(6)
+            .frame(width: 42, height: 36)
     }
 }

@@ -16,8 +16,8 @@ struct PhotoRowView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: 55)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .frame(maxWidth: UIScreen.main.bounds.width / 4)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .frame(maxWidth: UIScreen.main.bounds.width / 5)
             
             Text(photo.name)
                 .font(.headline)
