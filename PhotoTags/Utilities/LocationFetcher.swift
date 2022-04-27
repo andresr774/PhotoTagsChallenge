@@ -7,30 +7,15 @@
 
 import CoreLocation
 
-class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
+class LocationFetcher: NSObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     var lastKnownLocation: CLLocation?
-    
-    @Published var locationAuthorized: Bool
+        
+    var locationAuthorized: ((Bool) -> Void)?
         
     override init() {
-        print("[😀] Location Fetcher initialized")
-        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            locationAuthorized = true
-        } else {
-            locationAuthorized = false
-        }
         super.init()
-        
         self.manager.delegate = self
-        
-        if !locationAuthorized {
-            start()
-        }
-    }
-    
-    deinit {
-        print("[😀] Location Fetcher deinitialized")
     }
     
     func start() {
@@ -48,10 +33,11 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        
         if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            Task{ @MainActor in
-                locationAuthorized = true
-            }
+            locationAuthorized?(true)
+        } else {
+            locationAuthorized?(false)
         }
     }
 }

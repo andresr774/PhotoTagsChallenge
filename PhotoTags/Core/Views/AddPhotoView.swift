@@ -10,7 +10,7 @@ import CoreLocation
 
 struct AddPhotoView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var locationFetcher = LocationFetcher()
+    let locationFetcher = LocationFetcher()
     
     let image: UIImage
     let onSave: (_ name: String, _ location: CLLocationCoordinate2D) -> Void
@@ -72,36 +72,21 @@ struct AddPhotoView: View {
         }
         .padding([.top, .horizontal])
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                locationFetcher.start()
-                if locationFetcher.locationAuthorized {
-                    // Location authorized by user previously
-                    fieldIsFocused = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        if let location = locationFetcher.lastKnownLocation {
-                            currentLocation = location
-                            updatePlacemark(location: location)
-                            locationFetcher.stopUpdatingLocation()
-                            print("[😀] current location on appear: \(location)")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                locationFetcher.locationAuthorized = { authorized in
+                    if authorized {
+                        fieldIsFocused = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            if let location = locationFetcher.lastKnownLocation {
+                                currentLocation = location
+                                updatePlacemark(location: location)
+                                locationFetcher.stopUpdatingLocation()
+                                print("[😀] current location on appear: \(location)")
+                            }
                         }
                     }
                 }
-            }
-        }
-        // Location authorized by user
-        .onChange(of: locationFetcher.locationAuthorized) { authorized in
-            if authorized {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    fieldIsFocused = true
-                    if let location = locationFetcher.lastKnownLocation {
-                        currentLocation = location
-                        updatePlacemark(location: location)
-                        locationFetcher.stopUpdatingLocation()
-                        print("[😀] current location on appear: \(location)")
-                    }
-                }
-            } else {
-                showLocationAlert()
+                locationFetcher.start()
             }
         }
         .alert(alertTitle, isPresented: $showAlert) {

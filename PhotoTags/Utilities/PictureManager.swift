@@ -5,7 +5,6 @@
 //  Created by Andres camilo Raigoza misas on 5/04/22.
 //
 
-import Foundation
 import SwiftUI
 
 struct PictureManager: UIViewControllerRepresentable {
@@ -31,12 +30,12 @@ struct PictureManager: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
-        let vc = UIImagePickerController()
-        vc.sourceType = .camera
-        vc.allowsEditing = true
-        vc.delegate = context.coordinator
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.allowsEditing = true
+        picker.delegate = context.coordinator
         
-        return vc
+        return picker
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
