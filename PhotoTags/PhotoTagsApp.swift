@@ -20,7 +20,7 @@ struct PhotoTagsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PhotosListView()
+            LocationFetcherExample()
         }
     }
 }

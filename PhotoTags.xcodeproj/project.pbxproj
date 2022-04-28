@@ -14,6 +14,8 @@
 		8133604027FB7BFE0043F304 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133603F27FB7BFE0043F304 /* Animatable.swift */; };
 		8133604227FB7CB80043F304 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133604127FB7CB80043F304 /* View.swift */; };
 		8133604427FCC80E0043F304 /* PictureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8133604327FCC80E0043F304 /* PictureManager.swift */; };
+		8153F0762819D80B006FEC9F /* LocationFetcherExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8153F0752819D80B006FEC9F /* LocationFetcherExample.swift */; };
+		8153F0782819E1F2006FEC9F /* MapExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8153F0772819E1F2006FEC9F /* MapExample.swift */; };
 		815B398C27F7889D004E1102 /* PhotoTagsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B398B27F7889D004E1102 /* PhotoTagsApp.swift */; };
 		815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B398D27F7889D004E1102 /* PhotosListView.swift */; };
 		815B399027F7889D004E1102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B398F27F7889D004E1102 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		8133603F27FB7BFE0043F304 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		8133604127FB7CB80043F304 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		8133604327FCC80E0043F304 /* PictureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureManager.swift; sourceTree = "<group>"; };
+		8153F0752819D80B006FEC9F /* LocationFetcherExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcherExample.swift; sourceTree = "<group>"; };
+		8153F0772819E1F2006FEC9F /* MapExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExample.swift; sourceTree = "<group>"; };
 		815B398827F7889D004E1102 /* PhotoTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		815B398B27F7889D004E1102 /* PhotoTagsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTagsApp.swift; sourceTree = "<group>"; };
 		815B398D27F7889D004E1102 /* PhotosListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosListView.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				815B39A327F78E09004E1102 /* Models */,
 				815B399F27F78D35004E1102 /* Core */,
 				81198DC727FDF7A600E316E8 /* TestView.swift */,
+				8153F0752819D80B006FEC9F /* LocationFetcherExample.swift */,
+				8153F0772819E1F2006FEC9F /* MapExample.swift */,
 				815B398F27F7889D004E1102 /* Assets.xcassets */,
 				815B399127F7889D004E1102 /* Preview Content */,
 			);
@@ -244,9 +250,11 @@
 				815B399C27F78977004E1102 /* Photo.swift in Sources */,
 				815B398E27F7889D004E1102 /* PhotosListView.swift in Sources */,
 				8133603A27FA01F90043F304 /* LocationFetcher.swift in Sources */,
+				8153F0782819E1F2006FEC9F /* MapExample.swift in Sources */,
 				816E191027F79F7A00C5878E /* AddPhotoView.swift in Sources */,
 				815B399E27F78ACC004E1102 /* PhotoRowView.swift in Sources */,
 				8133604027FB7BFE0043F304 /* Animatable.swift in Sources */,
+				8153F0762819D80B006FEC9F /* LocationFetcherExample.swift in Sources */,
 				815B39A627F79941004E1102 /* ImagePicker.swift in Sources */,
 				8133604227FB7CB80043F304 /* View.swift in Sources */,
 				8133603627F8B28D0043F304 /* FileManager.swift in Sources */,

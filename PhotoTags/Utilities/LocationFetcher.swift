@@ -9,9 +9,10 @@ import CoreLocation
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
-    var lastKnownLocation: CLLocation?
+    
+    var location: ((CLLocation) -> Void)?
         
-    var locationAuthorized: ((Bool) -> Void)?
+    var authorizationChanged: ((Bool) -> Void)?
         
     override init() {
         super.init()
@@ -24,20 +25,26 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastKnownLocation = locations.first
-        print("user location: \(lastKnownLocation)")
-    }
-    
-    func stopUpdatingLocation() {
-        manager.stopUpdatingLocation()
+        if let lastKnownLocation = locations.first {
+            location?(lastKnownLocation)
+            manager.stopUpdatingLocation()
+            print("user location: \(lastKnownLocation)")
+        }
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        
         if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            locationAuthorized?(true)
+            authorizationChanged?(true)
         } else {
-            locationAuthorized?(false)
+            authorizationChanged?(false)
+        }
+    }
+    
+    func isAuthorized() -> Bool {
+        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
+            return true
+        } else {
+            return false
         }
     }
 }

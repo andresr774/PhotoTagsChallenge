@@ -11,11 +11,12 @@ import CoreLocation
 struct AddPhotoView: View {
     @Environment(\.dismiss) private var dismiss
     let locationFetcher = LocationFetcher()
-    
+        
     let image: UIImage
     let onSave: (_ name: String, _ location: CLLocationCoordinate2D) -> Void
     
     @State private var currentLocation: CLLocation?
+    @State private var locationAuthorized = false
     
     @State private var name = ""
     @FocusState private var fieldIsFocused: Bool
@@ -25,7 +26,7 @@ struct AddPhotoView: View {
     @State private var alertMessage = ""
     
     @State private var placemark: CLPlacemark?
-        
+            
     init(image: UIImage, onSave: @escaping (String, CLLocationCoordinate2D) -> Void) {
         self.image = image
         self.onSave = onSave
@@ -53,7 +54,7 @@ struct AddPhotoView: View {
                 .scaledToFit()
                         
             Label(
-                placemark == nil ? "Fetching Location…" : "\(placemark!.locality ?? ""), \(placemark!.country ?? "")",
+                !locationAuthorized ? "Location not authorized" : placemark == nil ? "Fetching Location…" : "\(placemark!.locality ?? ""), \(placemark!.country ?? "")",
                 systemImage: "mappin.and.ellipse"
             )
             .font(.caption)
@@ -67,48 +68,78 @@ struct AddPhotoView: View {
                 .padding(.leading)
                 .background(Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(12)
+                .padding(.bottom)
+            
+            if !locationAuthorized {
+                Text("Location Service not authorized!")
+                Button("Open Settings", action: openSettings)
+            }
             
             Spacer()
         }
         .padding([.top, .horizontal])
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                locationFetcher.locationAuthorized = { authorized in
-                    if authorized {
+        .onAppear(perform: getCurrentLocation)
+        .alert(alertTitle, isPresented: $showAlert) {
+            if locationAuthorized {
+                Button("OK", role: .cancel) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                         fieldIsFocused = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                            if let location = locationFetcher.lastKnownLocation {
-                                currentLocation = location
-                                updatePlacemark(location: location)
-                                locationFetcher.stopUpdatingLocation()
-                                print("[😀] current location on appear: \(location)")
-                            }
-                        }
                     }
                 }
-                locationFetcher.start()
-            }
-        }
-        .alert(alertTitle, isPresented: $showAlert) {
-            Button("OK", role: .cancel) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                    fieldIsFocused = true
+            } else {
+                Button("Open Settings") {
+                    openSettings()
                 }
+                Button("Cancel", role: .cancel) { }
             }
         } message: {
             Text(alertMessage)
         }
     }
     
+    private func getCurrentLocation() {
+        locationFetcher.location = { location in
+            currentLocation = location
+            updatePlacemark(location: location)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                fieldIsFocused = true
+            }
+        }
+        locationFetcher.authorizationChanged = { authorized in
+            locationAuthorized = authorized
+        }
+        locationAuthorized = locationFetcher.isAuthorized()
+        locationFetcher.start()
+    }
+    
+    private func openSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl) { success in
+                print("Settings opened: \(success)")
+                dismiss()
+            }
+        }
+    }
+    
     private func save() {
+        guard locationAuthorized else {
+            alertTitle = "Location Not Authorized!"
+            alertMessage = "You need to authorize location service in order to save your picture"
+            showAlert = true
+            return
+        }
+        guard let currentLocation = currentLocation else {
+            showLocationAlert()
+            return
+        }
+
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         if !trimmedName.isEmpty {
-            if let currentLocation = currentLocation {
-                onSave(trimmedName, currentLocation.coordinate)
-                dismiss()
-            } else {
-                showLocationAlert()
-            }
+            onSave(trimmedName, currentLocation.coordinate)
+            dismiss()
         } else {
             alertTitle = "Name is empty!"
             alertMessage = "You must provide a name for the picture in order to save it"
